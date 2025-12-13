@@ -1,0 +1,2824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abhishek Dharsandiya - Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* All CSS remains exactly the same as before */
+    /* Base Styles */
+    :root {
+      --bg: #0a0f1a;
+      --bg-alt: #111827;
+      --panel: #1a2332;
+      --panel-light: #243044;
+      --muted: rgba(255,255,255,0.7);
+      --accent: #3b82f6;
+      --accent-light: #60a5fa;
+      --accent-dark: #2563eb;
+      --secondary: #10b981;
+      --tertiary: #f59e0b;
+      --glass: rgba(255,255,255,0.05);
+      --input-border: rgba(255,255,255,0.1);
+      --max-width: 1200px;
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --gradient: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+      --gradient-alt: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+      --gradient-text: linear-gradient(135deg, #3b82f6 0%, #1e71f7 20%, #3b82f6 100%);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: "Inter", "Poppins", system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(135deg, var(--bg) 0%, var(--bg-alt) 100%);
+      color: #e9edf2;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(245, 158, 11, 0.04) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Floating camera icons */
+    #floating-cameras {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    .fcam {
+      position: absolute;
+      display: inline-grid;
+      place-items: center;
+      color: rgba(59, 130, 246, 0.15);
+      opacity: 0.15;
+      will-change: transform;
+      -webkit-font-smoothing: antialiased;
+      transform-origin: center;
+      pointer-events: none;
+      text-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .fcam i {
+      display: block;
+      filter: drop-shadow(0 6px 18px rgba(0,0,0,0.45));
+    }
+
+    /* Make sure content has higher z-index */
+    .navbar, .about-nav, #main-content, #about-page {
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Navbar */
+    .navbar {
+      width: 100%;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 60;
+      backdrop-filter: blur(20px);
+      background: rgba(10, 15, 26, 0.85);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .logo {
+      font-weight: 800;
+      color: var(--accent);
+      font-size: 24px;
+      letter-spacing: -0.5px;
+      position: relative;
+    }
+
+    .logo::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--gradient);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .logo:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .logo span {
+      color: var(--gradient);
+    }
+
+    .navbar ul {
+      display: flex;
+      list-style: none;
+      gap: 32px;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar a {
+      color: #e9edf2;
+      font-size: 16px;
+      font-weight: 500;
+      transition: all var(--transition);
+      position: relative;
+      padding: 8px 0;
+    }
+
+    .navbar a:hover {
+      color: var(--accent);
+    }
+
+    .navbar a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient);
+      transition: width var(--transition);
+    }
+
+    .navbar a:hover::after {
+      width: 100%;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 70;
+    }
+
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 80%;
+      max-width: 300px;
+      height: 100vh;
+      background: var(--bg);
+      z-index: 65;
+      padding: 80px 30px 30px;
+      transition: right 0.3s ease;
+      border-left: 1px solid rgba(255,255,255,0.1);
+      box-shadow: -5px 0 30px rgba(0,0,0,0.5);
+    }
+
+    .mobile-menu.active {
+      right: 0;
+    }
+
+    .mobile-menu ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .mobile-menu a {
+      color: #e9edf2;
+      font-size: 18px;
+      font-weight: 500;
+      padding: 12px 0;
+      display: block;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      transition: color 0.3s ease;
+    }
+
+    .mobile-menu a:hover {
+      color: var(--accent);
+    }
+
+    .mobile-menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      z-index: 64;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-menu-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 200px 20px 80px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .glow-text {
+      font-size: 72px;
+      background: var(--gradient-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 800;
+      margin-bottom: 24px;
+      letter-spacing: -2px;
+      line-height: 1.1;
+      position: relative;
+      display: inline-block;
+    }
+
+    .glow-text::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 4px;
+      background: var(--gradient);
+      border-radius: 2px;
+    }
+
+    #typing {
+  color: #c3c8d4;
+  font-size: 28px;
+  margin-top: 20px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  height: 40px; /* Fixed height to prevent layout shift */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* Hide any overflow during animation */
+}
+
+@media (max-width: 768px) {
+  #typing {
+    font-size: 20px;
+    height: 32px; /* Adjusted for mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  #typing {
+    font-size: 18px;
+    height: 28px; /* Adjusted for small mobile */
+  }
+}
+
+    /* Section Title */
+    .section-title {
+      text-align: center;
+      font-size: 48px;
+      margin: 100px 0 48px;
+      background: var(--gradient);
+      color: #fff;
+      padding: 16px 36px;
+      display: inline-block;
+      border-radius: 16px;
+      font-weight: 800;
+      position: relative;
+      z-index: 10;
+      box-shadow: 
+        0 15px 35px rgba(59, 130, 246, 0.25),
+        inset 0 1px 0 rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.1);
+      transform: translateY(0);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .section-title:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Showreel Section */
+    .showreel {
+      padding: 60px 20px;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      position: relative;
+      padding-bottom: 0px;
+      padding-top: 0px;
+      z-index: 10;
+    }
+
+    .video-container {
+      max-width: 980px;
+      margin: 24px auto 60px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 
+        0 25px 50px rgba(0,0,0,0.5),
+        0 0 40px rgba(59, 130, 246, 0.15);
+      position: relative;
+      border: 1px solid rgba(255,255,255,0.1);
+      transform: translateY(0);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .video-container:hover {
+      transform: translateY(-10px);
+    }
+
+    .video-thumbnail {
+      width: 100%;
+      height: 500px;
+      background-size: cover;
+      background-position: center;
+      cursor: pointer;
+      position: relative;
+      display: block;
+    }
+
+    .video-thumbnail.hidden {
+      display: none;
+    }
+
+    .video-thumbnail::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(59,130,246,0.1) 0%, rgba(30,64,175,0.1) 100%);
+      transition: background 0.3s ease;
+    }
+
+    .video-thumbnail:hover::after {
+      background: linear-gradient(135deg, rgba(59,130,246,0.2) 0%, rgba(30,64,175,0.2) 100%);
+    }
+
+    .play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--gradient);
+      color: #fff;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      z-index: 2;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 
+        0 15px 35px rgba(59, 130, 246, 0.4),
+        inset 0 1px 0 rgba(255,255,255,0.2);
+      border: 2px solid rgba(255,255,255,0.1);
+    }
+
+    .video-thumbnail:hover .play-button {
+      transform: translate(-50%, -50%) scale(1.15);
+      background: var(--gradient-alt);
+      box-shadow: 
+        0 20px 40px rgba(59, 130, 246, 0.5),
+        inset 0 1px 0 rgba(255,255,255,0.3);
+    }
+
+    .video-player {
+      width: 100%;
+      height: 500px;
+      border: 0;
+      display: none;
+    }
+
+    .video-player.active {
+      display: block;
+    }
+
+    /* YouTube Projects Section */
+    .youtube-projects {
+      padding: 80px 20px;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      position: relative;
+      padding-top: 0px;
+      padding-bottom: 0px;
+      z-index: 10;
+    }
+    
+    .projects-container {
+      display: flex;
+      gap: 48px;
+      margin-top: 48px;
+    }
+    
+    .video-thumbnails {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-height: 650px;
+      overflow-y: auto;
+      padding-right: 15px;
+    }
+    
+    .video-thumbnails::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    .video-thumbnails::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+    }
+    
+    .video-thumbnails::-webkit-scrollbar-thumb {
+      background: var(--gradient);
+      border-radius: 10px;
+    }
+    
+    .thumbnail {
+      display: flex;
+      gap: 18px;
+      padding: 20px;
+      background: var(--panel);
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .thumbnail::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+      transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .thumbnail:hover::before {
+      left: 100%;
+    }
+    
+    .thumbnail:hover {
+      background: var(--panel-light);
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+      border-color: rgba(59, 130, 246, 0.2);
+    }
+    
+    .thumbnail.active {
+      border-color: var(--accent);
+      background: rgba(59, 130, 246, 0.08);
+      box-shadow: 0 12px 25px rgba(59, 130, 246, 0.2);
+    }
+    
+    .thumbnail-img {
+      width: 180px;
+      height: 100px;
+      border-radius: 12px;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      flex-shrink: 0;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .thumbnail-img .play-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0,0,0,0.7);
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .thumbnail:hover .thumbnail-img .play-icon {
+      opacity: 1;
+    }
+    
+    .thumbnail-info {
+      flex: 1;
+    }
+    
+    .thumbnail-title {
+      font-weight: 700;
+      font-size: 17px;
+      margin-bottom: 6px;
+      color: #fff;
+    }
+    
+    .thumbnail-channel {
+      font-size: 14px;
+      color: var(--muted);
+    }
+    
+    .video-details {
+      flex: 1;
+      background: var(--panel);
+      border-radius: 20px;
+      padding: 36px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.1);
+      transform: translateY(0);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .video-details:hover {
+      transform: translateY(-5px);
+    }
+    
+    .project-title {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: var(--accent);
+    }
+    
+    /* REMOVED: Project stats and savings rate section */
+    
+    /* Project Video Player */
+    .project-video-container {
+      width: 100%;
+      height: 450px;
+      margin-bottom: 30px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+      background: #000;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .project-video-player {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* REMOVED: Project stats styling */
+
+    .project-achievements {
+      list-style: none;
+      padding: 0;
+      margin: 24px 0 0 0;
+    }
+    
+    .project-achievements li {
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      color: var(--muted);
+      font-size: 15px;
+      position: relative;
+      padding-left: 32px;
+      transition: color 0.3s ease;
+    }
+
+    .project-achievements li:hover {
+      color: #fff;
+    }
+    
+    .project-achievements li:before {
+      content: "✓";
+      color: var(--accent);
+      position: absolute;
+      left: 0;
+      font-weight: 800;
+      font-size: 18px;
+    }
+    
+    .project-achievements li:last-child {
+      border-bottom: none;
+    }
+    
+    .project-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    /* Shorts Projects */
+    .shorts {
+      padding: 80px 20px;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      position: relative;
+      padding-top: 5px;
+      padding-bottom: 0px;
+      z-index: 10;
+    }
+
+    .carousel-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      padding: 24px;
+      position: relative;
+    }
+
+    .arrow {
+      background: var(--gradient);
+      border: none;
+      font-size: 24px;
+      padding: 16px;
+      cursor: pointer;
+      border-radius: 50%;
+      font-weight: 800;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      color: #fff;
+      z-index: 20;
+    }
+
+    .arrow:hover {
+      background: var(--gradient-alt);
+      transform: scale(1.15);
+      box-shadow: 0 12px 30px rgba(59, 130, 246, 0.4);
+    }
+
+    .carousel {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      width: 80%;
+      padding: 8px;
+      position: relative;
+      scroll-snap-type: x mandatory;
+    }
+
+    .carousel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .short-card {
+      min-width: 320px;
+      height: 540px;
+      background: var(--panel);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      scroll-snap-align: center;
+    }
+
+    .short-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      border-color: rgba(59, 130, 246, 0.3);
+    }
+
+    .short-card iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      border-radius: 16px;
+    }
+
+    /* Scroll Indicator */
+    .scroll-indicator {
+      display: none;
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      z-index: 20;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      animation: pulse 2s infinite;
+    }
+
+    .scroll-indicator i {
+      margin-right: 8px;
+    }
+
+    /* Dots indicator for mobile */
+    .carousel-dots {
+      display: none;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+      z-index: 20;
+    }
+
+    .carousel-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .carousel-dot.active {
+      background: var(--accent);
+      transform: scale(1.2);
+    }
+
+    @keyframes pulse {
+      0% { transform: translateX(-50%) scale(1); }
+      50% { transform: translateX(-50%) scale(1.05); }
+      100% { transform: translateX(-50%) scale(1); }
+    }
+
+    /* Clients Section */
+    .section-clients {
+      padding: 100px 20px 60px;
+      text-align: center;
+      position: relative;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding-top: 10px;
+      padding-bottom: 5px;
+      z-index: 10;
+    }
+
+    .clients-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+    .client {
+      text-align: center;
+    }
+
+    .client-logo {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at center, rgba(255,255,255,0.05), transparent);
+  border: 6px solid rgba(255,255,255,0.1);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+    .client-logo::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: var(--gradient);
+  border-radius: 50%;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+    .client-logo:hover::before {
+      opacity: 1;
+    }
+
+    .client-logo:hover {
+  transform: scale(1.08);
+  border-color: transparent;
+  box-shadow: 0 15px 35px rgba(59, 130, 246, 0.3);
+}
+
+    .client-logo img {
+  width: 85%;
+  height: 85%;
+  object-fit: contain; /* Changed from cover to contain to show full logo */
+  display: block;
+  border-radius: 50%; /* Make the image itself round */
+  padding: 10px; /* Add some padding inside the circle */
+  background: white; /* Background color for the logo */
+}
+
+    .client-name {
+      font-weight: 800;
+      color: var(--accent);
+      margin: 8px 0 4px;
+      font-size: 20px;
+    }
+
+    .client-meta {
+      color: #cbd5e1;
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    /* Updated Testimonials Section - FIXED VERSION */
+.testimonials {
+  padding: 100px 20px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  position: relative;
+  padding-top: 15px;
+  z-index: 10;
+}
+
+.testimonials-container {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 20px;
+  background: var(--panel);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 30px;
+}
+
+.testimonials-carousel {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+}
+
+.testimonial-slide {
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  gap: 30px;
+  padding: 0 10px;
+}
+
+.testimonial-video {
+  position: relative;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000;
+  aspect-ratio: 16 / 9;
+}
+
+.testimonial-video iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.testimonial-content {
+  text-align: center;
+  padding: 0 20px;
+}
+
+.testimonial-text {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin-bottom: 20px;
+  font-style: italic;
+  position: relative;
+  padding: 0 20px;
+}
+
+.testimonial-text::before,
+.testimonial-text::after {
+  content: '"';
+  color: var(--accent);
+  font-size: 24px;
+  font-weight: 800;
+  position: absolute;
+}
+
+.testimonial-text::before {
+  top: -10px;
+  left: 0;
+}
+
+.testimonial-text::after {
+  bottom: -20px;
+  right: 0;
+}
+
+.testimonial-author {
+  font-weight: 700;
+  font-size: 20px;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.testimonial-role {
+  color: var(--accent);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.testimonial-nav {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.testimonial-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.testimonial-dot.active {
+  background: var(--accent);
+  transform: scale(1.2);
+}
+
+.testimonial-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--gradient);
+  border: none;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 20;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  transition: all 0.3s ease;
+  opacity: 0.9;
+}
+
+.testimonial-arrow:hover {
+  background: var(--gradient-alt);
+  transform: translateY(-50%) scale(1.15);
+  opacity: 1;
+  box-shadow: 0 12px 30px rgba(59, 130, 246, 0.5);
+}
+
+.testimonial-arrow.prev {
+  left: 20px;
+}
+
+.testimonial-arrow.next {
+  right: 20px;
+}
+
+/* Responsive adjustments for testimonials */
+@media (max-width: 1100px) {
+  .testimonial-arrow.prev {
+    left: -70px;
+  }
+  
+  .testimonial-arrow.next {
+    right: -70px;
+  }
+}
+
+@media (max-width: 768px) {
+  .testimonials-container {
+    padding: 20px;
+  }
+  
+  .testimonial-slide {
+    gap: 20px;
+    padding: 0 5px;
+  }
+  
+  .testimonial-video {
+    aspect-ratio: 16 / 9;
+  }
+  
+  .testimonial-text {
+    font-size: 16px;
+    padding: 0 10px;
+  }
+  
+  .testimonial-arrow {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+  }
+  
+  .testimonial-arrow.prev {
+    left: 10px;
+  }
+  
+  .testimonial-arrow.next {
+    right: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .testimonial-arrow.prev {
+    left: -50px;
+  }
+  
+  .testimonial-arrow.next {
+    right: -50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .testimonials-container {
+    padding: 15px;
+  }
+  
+  .testimonial-slide {
+    gap: 15px;
+  }
+  
+  .testimonial-text {
+    font-size: 15px;
+  }
+  
+  .testimonial-arrow {
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+  }
+  
+  .testimonial-arrow.prev {
+    left: 5px;
+  }
+  
+  .testimonial-arrow.next {
+    right: 5px;
+  }
+}
+
+    /* Contact Section */
+    .section-contact {
+      padding: 100px 20px;
+      background: linear-gradient(135deg, rgba(0,0,0,0.15) 0%, transparent 100%);
+      color: #fff;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      position: relative;
+      z-index: 10;
+    }
+
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    .contact-info-col {
+      padding: 36px;
+      background: var(--panel);
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.1);
+      transform: translateY(0);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .contact-info-col:hover {
+      transform: translateY(-5px);
+    }
+
+    .contact-heading {
+      color: var(--accent);
+      font-size: 32px;
+      margin-bottom: 30px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .contact-divider {
+      height: 20px;
+    }
+
+    .info-label {
+      color: rgba(255,255,255,0.6);
+      margin-top: 24px;
+      font-size: 16px;
+      font-weight: 600;
+      display: block;
+    }
+
+    .info-link {
+      display: inline-block;
+      color: var(--accent);
+      text-decoration: none;
+      margin: 10px 0;
+      font-weight: 600;
+      font-size: 18px;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .info-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient);
+      transition: width 0.3s ease;
+    }
+
+    .info-link:hover::after {
+      width: 100%;
+    }
+
+    .info-link:hover {
+      color: var(--accent-light);
+    }
+
+    .info-text {
+      margin: 10px 0 16px;
+      color: #cbd5e1;
+      font-weight: 600;
+      font-size: 18px;
+    }
+
+    .socials {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .socials a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+      margin: 0 12px;
+      font-size: 18px;
+    }
+
+    .socials a:hover {
+      color: var(--accent-light);
+    }
+
+    /* Footer */
+    .site-footer {
+      margin-top: 80px;
+      padding: 24px 32px 32px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      color: var(--muted);
+      position: relative;
+      z-index: 10;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .footer-name {
+      font-weight: 800;
+      color: var(--accent);
+      font-size: 20px;
+    }
+
+    .follow-label {
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: inline-grid;
+      place-items: center;
+      background: #0077B5;
+      font-weight: 800;
+      color: #fff;
+      font-size: 14px;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .icon i {
+  font-size: 16px;
+}
+
+    .icon.instagram {
+  background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+}
+
+    .icon:hover {
+      background: var(--gradient);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(59, 130, 246, 0.3);
+    }
+
+    .icon.instagram:hover {
+  background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(225, 48, 108, 0.3);
+}
+
+    .footer-line {
+      height: 4px;
+      max-width: var(--max-width);
+      margin: 20px auto 0;
+      background: var(--gradient);
+      border-radius: 3px;
+    }
+
+    /* About Page */
+    .about-main {
+      padding: 140px 20px 100px;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: none;
+      position: relative;
+      z-index: 10;
+    }
+
+    .about-card {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 48px;
+      align-items: start;
+      background: transparent;
+    }
+
+    .portrait {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(255,255,255,0.03), transparent);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .portrait img {
+      width: 260px;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 14px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+      border: 6px solid rgba(0,0,0,0.4);
+    }
+
+    .about-text .title {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--accent);
+      margin: 8px 0 12px;
+    }
+
+    .about-text .intro {
+      color: #fff;
+      font-weight: 700;
+      margin-bottom: 16px;
+      font-size: 18px;
+    }
+
+    .about-text .bio p {
+      line-height: 1.7;
+      color: var(--muted);
+      margin-bottom: 16px;
+      font-size: 16px;
+    }
+
+    .about-text .bio .highlight {
+      color: #dbeafe;
+      background: rgba(59, 130, 246, 0.08);
+      padding: 20px;
+      border-radius: 16px;
+      font-weight: 700;
+      margin: 16px 0;
+      border-left: 4px solid var(--accent);
+      position: relative;
+    }
+
+    .about-text .bio .highlight::before {
+      content: '"';
+      position: absolute;
+      top: 10px;
+      left: 15px;
+      font-size: 40px;
+      color: var(--accent);
+      opacity: 0.3;
+    }
+
+    .about-cta {
+      margin-top: 24px;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--gradient);
+      color: #fff;
+      padding: 14px 26px;
+      border-radius: 14px;
+      font-weight: 800;
+      box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+      transition: all 0.3s ease;
+      font-size: 16px;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      background: var(--gradient-alt);
+      color: #c3c8d4;
+      box-shadow: 0 12px 25px rgba(59, 130, 246, 0.4);
+    }
+
+    .btn-secondary {
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--muted);
+      padding: 14px 26px;
+      border-radius: 14px;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      font-size: 16px;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(59, 130, 246, 0.3);
+      transform: translateY(-2px);
+      color: #fff;
+    }
+
+    /* About Page Navbar */
+    .about-nav {
+      width: 100%;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 60;
+      backdrop-filter: blur(20px);
+      background: rgba(10, 15, 26, 0.85);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: none;
+    }
+
+    .about-nav ul {
+      display: flex;
+      list-style: none;
+      gap: 32px;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    .about-nav a {
+      color: #e9edf2;
+      font-size: 16px;
+      transition: color var(--transition);
+      font-weight: 500;
+    }
+
+    .about-nav a:hover {
+      color: var(--accent);
+    }
+
+    .about-nav a.active {
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    /* Animations */
+    @keyframes floatY {
+      0%   { transform: translateY(0) rotate(0deg); }
+      50%  { transform: translateY(-20px) rotate(8deg); }
+      100% { transform: translateY(0) rotate(0deg); }
+    }
+
+    @keyframes swayX {
+      0%   { transform: translateX(0); }
+      50%  { transform: translateX(12px); }
+      100% { transform: translateX(0); }
+    }
+
+    /* =========================================== */
+    /* RESPONSIVE DESIGN */
+    /* =========================================== */
+
+    /* Tablets and smaller laptops */
+    @media (max-width: 1100px) {
+      .about-card {
+        grid-template-columns: 1fr;
+      }
+      
+      .projects-container {
+        flex-direction: column;
+      }
+      
+      .video-thumbnails {
+        max-height: 350px;
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
+      }
+      
+      .thumbnail {
+        min-width: 280px;
+      }
+      
+      .contact-inner {
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+      }
+      
+      .clients-grid {
+        gap: 30px;
+      }
+      
+      .client-logo {
+    width: 140px;
+    height: 140px;
+  }
+      
+      .glow-text {
+        font-size: 52px;
+      }
+      
+      .section-title {
+        font-size: 36px;
+        padding: 12px 24px;
+      }
+      
+      .project-video-container {
+        height: 350px;
+      }
+      
+      /* Testimonials Responsive */
+      .testimonial-arrow.prev {
+        left: -70px;
+      }
+      
+      .testimonial-arrow.next {
+        right: -70px;
+      }
+    }
+
+    /* Mobile devices */
+    @media (max-width: 768px) {
+      /* Navigation */
+      .navbar ul, .about-nav ul {
+        display: none;
+      }
+      
+      .mobile-menu-toggle {
+        display: block;
+      }
+      
+      .navbar, .about-nav {
+        padding: 16px 20px;
+      }
+      
+      .logo {
+        font-size: 20px;
+      }
+      
+      /* Hero Section */
+      .hero {
+        padding: 150px 20px 60px;
+      }
+      
+      .glow-text {
+        font-size: 40px;
+        line-height: 1.2;
+      }
+      
+      #typing {
+    font-size: 20px;
+    height: 32px; /* Adjusted for mobile */
+  }
+      
+      /* Section Titles */
+      .section-title {
+        font-size: 28px;
+        padding: 12px 20px;
+        margin: 60px 0 30px;
+      }
+      
+      /* Video Containers */
+      .video-container {
+        border-radius: 12px;
+      }
+      
+      .video-thumbnail, .video-player {
+        height: 250px;
+      }
+      
+      .play-button {
+        width: 70px;
+        height: 70px;
+        font-size: 20px;
+      }
+      
+      /* Projects Section */
+      .projects-container {
+        gap: 24px;
+      }
+      
+      .video-thumbnails {
+        max-height: 300px;
+      }
+      
+      .thumbnail {
+        flex-direction: column;
+        text-align: center;
+        padding: 16px;
+      }
+      
+      .thumbnail-img {
+        width: 100%;
+        height: 140px;
+      }
+      
+      .video-details {
+        padding: 24px;
+      }
+      
+      .project-video-container {
+        height: 250px;
+        margin-bottom: 20px;
+      }
+      
+      .project-title {
+        font-size: 22px;
+      }
+      
+      /* REMOVED: Project stats responsive styling */
+      
+      /* Shorts Section - FIXED FOR MOBILE */
+      .carousel-container {
+        gap: 10px;
+        padding: 16px;
+        flex-direction: column;
+        position: relative;
+      }
+      
+      .arrow {
+        padding: 12px;
+        font-size: 18px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 30;
+      }
+      
+      .arrow.left {
+        left: 5px;
+      }
+      
+      .arrow.right {
+        right: 5px;
+      }
+      
+      .carousel {
+        width: 100%;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-padding: 0 20px;
+        padding: 0 20px;
+      }
+      
+      .short-card {
+        min-width: 85vw;
+        height: 60vh; /* Reduced height for better visibility */
+        scroll-snap-align: center;
+        margin: 0 10px;
+      }
+      
+      /* Show scroll indicator on mobile */
+      .scroll-indicator {
+        display: flex;
+        align-items: center;
+      }
+      
+      /* Show dots on mobile */
+      .carousel-dots {
+        display: flex;
+      }
+      
+      /* Clients Section */
+      .clients-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+      
+      .client-logo {
+        width: 120px;
+        height: 120px;
+      }
+      
+      .client-name {
+        font-size: 18px;
+      }
+      
+      .client-meta {
+        font-size: 14px;
+      }
+      
+      /* Testimonials Mobile */
+      .testimonials-container {
+        padding: 20px;
+      }
+      
+      .testimonial-slide {
+        gap: 20px;
+        padding: 0 5px;
+      }
+      
+      .testimonial-video {
+        aspect-ratio: 16 / 9;
+      }
+      
+      .testimonial-text {
+        font-size: 16px;
+        padding: 0 10px;
+      }
+      
+      .testimonial-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+      }
+      
+      .testimonial-arrow.prev {
+        left: -60px;
+      }
+      
+      .testimonial-arrow.next {
+        right: -60px;
+      }
+      
+      /* Contact Section */
+      .section-contact {
+        padding: 60px 20px;
+      }
+      
+      .contact-info-col {
+        padding: 24px;
+      }
+      
+      .contact-heading {
+        font-size: 26px;
+      }
+      
+      .info-link, .info-text {
+        font-size: 16px;
+      }
+      
+      /* Footer */
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+      
+      .social-icons {
+        gap: 10px;
+      }
+      
+      /* About Page */
+      .about-main {
+        padding: 120px 20px 60px;
+      }
+      
+      .portrait {
+        padding: 20px;
+      }
+      
+      .portrait img {
+        width: 200px;
+        height: 200px;
+      }
+      
+      .about-text .title {
+        font-size: 26px;
+      }
+      
+      .about-text .intro {
+        font-size: 16px;
+      }
+      
+      .about-cta {
+        justify-content: center;
+      }
+      
+      .btn-primary, .btn-secondary {
+        padding: 12px 20px;
+        font-size: 14px;
+      }
+      
+      /* Mobile-specific floating cameras */
+      .fcam {
+        font-size: 20px !important;
+        opacity: 0.2 !important;
+      }
+    }
+
+    /* Small mobile devices */
+    @media (max-width: 480px) {
+      .hero {
+        padding: 130px 15px 40px;
+      }
+      
+      .glow-text {
+        font-size: 32px;
+      }
+      
+      #typing {
+        font-size: 18px;
+        height: 28px;
+      }
+      
+      .section-title {
+        font-size: 24px;
+        padding: 10px 16px;
+      }
+      
+      .video-thumbnail, .video-player {
+        height: 200px;
+      }
+      
+      .play-button {
+        width: 60px;
+        height: 60px;
+        font-size: 18px;
+      }
+      
+      .thumbnail {
+        min-width: 240px;
+      }
+      
+      .project-video-container {
+        height: 200px;
+      }
+      
+      .project-title {
+        font-size: 20px;
+      }
+      
+      /* REMOVED: Project stats small mobile styling */
+      
+      /* Shorts Section - FIXED FOR SMALL MOBILE */
+      .short-card {
+        min-width: 90vw;
+        height: 65vh; /* Slightly taller on very small screens */
+      }
+      
+      .arrow {
+        padding: 10px;
+        font-size: 16px;
+      }
+      
+      /* Testimonials Small Mobile */
+      .testimonials-container {
+        padding: 15px;
+      }
+      
+      .testimonial-slide {
+        gap: 15px;
+      }
+      
+      .testimonial-text {
+        font-size: 15px;
+      }
+      
+      .testimonial-arrow {
+        width: 40px;
+    height: 40px;
+    font-size: 16px;
+      }
+      
+      .testimonial-arrow.prev {
+        left: -40px;
+      }
+      
+      .testimonial-arrow.next {
+        right: -40px;
+      }
+      
+      .clients-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .client-logo {
+    width: 140px;
+    height: 140px;
+  }
+      .portrait img {
+        width: 160px;
+        height: 160px;
+      }
+      
+      .about-text .title {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Floating camera icons background -->
+  <div id="floating-cameras" aria-hidden="true"></div>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#" id="mobile-about-link">About Me</a></li>
+      <li><a href="#projects" class="mobile-nav-link">Projects</a></li>
+      <li><a href="#clients" class="mobile-nav-link">Clients</a></li>
+      <li><a href="#testimonials" class="mobile-nav-link">Testimonials</a></li>
+      <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- Main Navbar -->
+  <nav class="navbar" id="main-navbar">
+    <div class="logo">Abhishek <span>Dharsandiya</span></div>
+    <ul>
+      <li><a href="#" id="about-link">About Me</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#clients">Clients</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+      <i class="fas fa-bars"></i>
+    </button>
+  </nav>
+
+  <!-- About Page Navbar -->
+  <nav class="about-nav" id="about-navbar">
+    <div class="logo">Abhishek <span>Dharsandiya</span></div>
+    <ul>
+      <li><a href="#" id="home-link">Home</a></li>
+      <li><a href="#" class="active">About</a></li>
+      <li><a href="#" data-target="projects">Projects</a></li>
+      <li><a href="#" data-target="clients">Clients</a></li>
+      <li><a href="#" data-target="testimonials">Testimonials</a></li>
+      <li><a href="#" data-target="contact">Contact</a></li>
+    </ul>
+    <button class="mobile-menu-toggle" id="aboutMobileMenuToggle">
+      <i class="fas fa-bars"></i>
+    </button>
+  </nav>
+
+  <!-- Main Content -->
+  <div id="main-content">
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1 class="glow-text">Hi, I'm Abhishek</h1>
+      <h2><span id="typing"></span></h2>
+    </section>
+
+    <!-- Showreel Section -->
+    <section class="showreel">
+      <div class="video-container">
+        <div class="video-thumbnail" id="showreelThumbnail">
+          <div class="play-button">
+            <i class="fas fa-play"></i>
+          </div>
+        </div>
+        <iframe class="video-player" id="showreelVideo" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <!-- Video actions removed completely -->
+      </div>
+    </section>
+
+    <!-- YouTube Projects Section -->
+    <section class="youtube-projects" id="projects">
+      <h2 class="section-title">Long Projects</h2>
+      
+      <div class="projects-container">
+        <div class="video-thumbnails" id="projectsThumbnails">
+          <!-- Thumbnails will be generated by JavaScript -->
+        </div>
+        
+        <div class="video-details">
+          <!-- Video Player for Projects -->
+          <div class="project-video-container">
+            <iframe class="project-video-player" id="projectVideo" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          
+          <h3 class="project-title" id="projectTitle">Project Title</h3>
+          
+          <!-- REMOVED: Project stats section -->
+          
+          <!-- Updated: Achievements list container -->
+          <ul class="project-achievements" id="projectAchievements">
+            <!-- Achievements will be populated by JavaScript -->
+          </ul>
+          
+          <div class="project-actions">
+            <!-- Project actions removed completely -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Shorts Projects -->
+    <section class="shorts">
+      <h2 class="section-title">Short Projects</h2>
+
+      <div class="carousel-container">
+        <button class="arrow left" onclick="scrollShortsLeft()">◀</button>
+
+        <div class="carousel" id="shorts-carousel">
+          <!-- Shorts will be generated by JavaScript -->
+        </div>
+
+        <button class="arrow right" onclick="scrollShortsRight()">▶</button>
+        
+        <!-- Scroll indicator for mobile -->
+        <div class="scroll-indicator">
+          <i class="fas fa-arrows-alt-h"></i> Swipe to see more shorts
+        </div>
+      </div>
+      
+      <!-- Dots indicator for mobile -->
+      <div class="carousel-dots" id="shorts-dots">
+        <!-- Dots will be generated by JavaScript -->
+      </div>
+    </section>
+
+    <!-- Clients Section -->
+<section id="clients" class="section-clients">
+  <h2 class="section-title">Clients</h2>
+
+  <div class="clients-grid">
+    <div class="client">
+      <div class="client-logo">
+        <!-- Replace the div with an img tag -->
+        <img src="logo1.png" alt="Sankalp Education Logo">
+      </div>
+      <h4 class="client-name">Sankalp Education</h4>
+    </div>
+
+    <div class="client">
+      <div class="client-logo">
+        <!-- Replace the div with an img tag -->
+        <img src="logo2.jpg" alt="Brrainothon Logo">
+      </div>
+      <h4 class="client-name">Brrainothon</h4>
+    </div>
+
+    <div class="client">
+      <div class="client-logo">
+        <!-- Replace the div with an img tag -->
+        <img src="logo3.png" alt="Lean Capsule Logo">
+      </div>
+      <h4 class="client-name">Learn Capsule</h4>
+    </div>
+  </div>
+</section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+      <h2 class="section-title">Testimonials</h2>
+      
+      <div class="testimonials-container">
+        <button class="testimonial-arrow prev" onclick="prevTestimonial()">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        
+        <div class="testimonials-carousel" id="testimonialsCarousel">
+          <!-- Testimonials will be generated by JavaScript -->
+        </div>
+        
+        <button class="testimonial-arrow next" onclick="nextTestimonial()">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+        
+        <div class="testimonial-nav" id="testimonialNav">
+          <!-- Navigation dots will be generated by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-contact">
+      <div class="contact-inner">
+        <div class="contact-info-col">
+          <h3 class="contact-heading">GET IN TOUCH</h3>
+          
+          <span class="info-label">DROP A MAIL AT:</span>
+          <a class="info-link" href="mailto:abhiwork2310@gmail.com">abhiwork2310@gmail.com</a>
+
+          <span class="info-label">PHONE NUMBER:</span>
+          <p class="info-text">+91 9168132440</p>
+
+          <span class="info-label">LOCATION:</span>
+          <p class="info-text">India</p>
+
+          <!-- UPDATED: Keeping only LinkedIn -->
+          <div class="socials">
+            <a href="https://www.linkedin.com/in/abhishekdharsandiya?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" id="social-linkedin">LinkedIn</a>
+            <a href="https://www.instagram.com/editsxabhii?igsh=bXZqN3kwbGd3ZDE5&utm_source=qr" target="_blank" id="social-instagram">Instagram</a>
+          </div>
+        </div>
+        
+        <div class="contact-info-col">
+          <h3 class="contact-heading">AVAILABILITY</h3>
+          
+          <span class="info-label">STATUS:</span>
+          <p class="info-text">Available for new projects</p>
+
+          <span class="info-label">RESPONSE TIME:</span>
+          <p class="info-text">Within 24 hours</p>
+
+          <span class="info-label">PREFERRED CONTACT:</span>
+          <p class="info-text">Email or Instagram DM</p>
+
+          <div class="socials" style="margin-top: 40px;">
+            <p style="color: var(--muted); font-size: 16px; margin-bottom: 16px;">Let's create something amazing together!</p>
+            <a href="mailto:abhiwork2310@gmail.com" class="btn-primary" style="color:rgba(255, 255, 255, 0.651); display: inline-block; text-decoration: none;">Send Email</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-left">
+          <div class="footer-name">Abhishek Dharsandiya</div>
+        </div>
+
+        <div class="footer-right">
+          <div class="follow-label">Follow Me</div>
+          <div class="social-icons">
+            <!-- UPDATED: Keeping only LinkedIn icon -->
+            <a href="https://www.linkedin.com/in/abhishekdharsandiya?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" class="icon linkedin" id="footer-linkedin" aria-label="LinkedIn">in</a>
+            <a href="https://www.instagram.com/editsxabhii?igsh=bXZqN3kwbGd3ZDE5&utm_source=qr" target="_blank" class="icon instagram" id="footer-instagram" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-line"></div>
+    </footer>
+  </div>
+
+  <!-- About Page -->
+  <div id="about-page" class="about-main">
+    <section class="about-card">
+      <div class="portrait">
+        <!-- Updated to use the real photo.jpg file -->
+        <img src="photo.png" alt="Abhishek Dharsandiya - Professional Video Editor">
+      </div>
+
+      <div class="about-text">
+        <h1 class="title">Abhishek Dharsandiya</h1>
+        <p class="intro"><strong>Hey! Thank you for visiting the website.</strong></p>
+
+        <div class="bio">
+          <p>Hi, I'm Abhishek, a Smart, Creative, and Detail-Driven Video Editor based in India.</p>
+
+          <p>I've been crafting videos since <strong>2016</strong>, and my passion for storytelling through visuals has only grown stronger with time.</p>
+
+          <p class="highlight">
+            With a strong understanding of design aesthetics, color theory, music selection, SFX, typography, and transitions, I bring together all the right elements to produce edits that not only look great but also feel right. Every frame I deliver has intention and impact.
+          </p>
+
+          <p>Beyond editing, I also love to shoot and direct videos — bringing ideas to life from concept to execution.</p>
+
+          <p>If my work resonates, have a scroll through my recent projects — let's connect!</p>
+        </div>
+
+        <div class="about-cta">
+          <a href="#" class="btn-primary" data-target="projects">See My Work</a>
+          <a href="#" class="btn-secondary" data-target="contact">Hire Me</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // =============================================
+    // SOCIAL MEDIA LINKS - UPDATED: Only LinkedIn
+    // =============================================
+    const socialLinks = {
+      linkedin: "https://www.linkedin.com/in/abhishekdharsandiya?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app", // REPLACE WITH YOUR ACTUAL LINKEDIN URL
+      instagram: "https://www.instagram.com/editsxabhii?igsh=bXZqN3kwbGd3ZDE5&utm_source=qr"   // ADD YOUR INSTAGRAM URL HERE
+    };
+
+    // =============================================
+    // VIDEO IDs - UPDATE THESE IF NEEDED
+    // =============================================
+    const videoConfig = {
+      // Showreel Video (Main showcase video)
+      showreel: "3sZnaoAF0Bw",
+      
+      // YouTube Projects (5 videos for the projects section)
+      projects: [
+        "s-8gwluIKaw",
+        "kbBigpViPXM", 
+        "IiE61fCp3T0",
+        "VIsqv8O-7Do",
+        "GaXz-4iIgyA"
+      ],
+      
+      // Shorts Videos (5 YouTube Shorts)
+      shorts: [
+        "oFFE3bHQPPI",
+        "N-ZjBalJJ8E",
+        "2zuxXRfT0Js",
+        "8zguXAYPFHs"
+      ]
+    };
+
+    // =============================================
+    // UPDATED: Video data - removed stats and savings rate
+    // =============================================
+    const videoData = {
+      showreel: {
+        title: "Professional Video Edit",
+        channel: "Abhishek Dharsandiya"
+      },
+      projects: [
+        { 
+          title: "This Real Estate Insight Shocked Me…", 
+          channel: "Blender Foundation", 
+          achievements: [
+            "Crafted a visually dynamic 1-minute podcast micro-edit, combining expressive typography and smooth animation for high-retention storytelling.",
+            "Designed a clean, modern type-driven narrative flow, enhancing clarity, pace, and viewer engagement even in short-form format.",
+            "Delivered a polished, brand-ready edit built to elevate podcast presence, perfect for reels, shorts, and high-performance social media distribution."
+          ]
+        },
+        { 
+          title: "My Sound Design Work on an Apple Watch Commercial", 
+          channel: "Blender Foundation", 
+          achievements: [
+            "Designed a high-fidelity sound-rich cinematic edit, elevating the Apple Watch Ultra's storytelling with precision-crafted audio detailing.",
+            "Engineered an immersive product-experience sequence by blending motion, sound layers, and clean transitions for a premium brand feel.",
+            "Delivered a studio-grade sound design showcase, built to demonstrate mastery in SFX layering, ambience creation & luxury-product pacing."
+          ]
+        },
+        { 
+          title: "Re-Editing the Hustle With Harman Video in My Style", 
+          channel: "Film Excerpt", 
+          achievements: [
+            "Re-imagined the original video with a sharper narrative flow, elevating pacing, energy, and emotional impact through my personal editing style.",
+            "Enhanced the visual storytelling with clean transitions, dynamic motion, and expressive typography, transforming the raw content into a high-engagement format.",
+            "Delivered a polished creator-centric re-edit designed to boost retention, improve watchability, and amplify the overall brand aesthetic."
+          ]
+        },
+        { 
+          title: "Podcast of ISHO Officer of Gujarat Government", 
+          channel: "Blender Foundation", 
+          achievements: [
+            "Crafted high-retention long-form content (1H+), maintaining audience interest through dynamic pacing and seamless narrative structuring.",
+            "Generated over 2,300+ highly targeted views, effectively engaging the niche GPSC aspirant community with optimized visual storytelling.",
+            "Elevated the institutional brand authority, transforming raw interview footage into a polished, broadcast-quality success story of a Govt. Officer."
+          ]
+        },
+        { 
+          title: "Podcast of Revenue Department Surveyor of Gujarat Government", 
+          channel: "Creative Studio", 
+          achievements: [
+            "Crafted engaging long-form podcast content (1H+), maintaining high audience retention by structuring complex interview topics into a compelling narrative.",
+            "Gained over 2.3K+ highly targeted views from GPSC aspirants, effectively driving organic engagement within the competitive education niche.",
+            "Strengthened the 'Sankalp Education' brand authority by professionally showcasing successful officer journeys to build trust and inspire future students."
+          ]
+        }
+      ],
+      testimonials: [
+        {
+          videoId: "SxYHV2FKWv0",
+          text: "At Sankalp Education, quality and clarity matters a lot to us, and Abhishek has been delivering exactly it in his video editing. From long podcast video to short educational clips, Abhishek ensures that [the] content is crisp and very impactful. His work ethic, timely delivery, and dedication makes him a valuable partner.",
+          author: "Sankalp Education",
+          role: "Director"
+        },
+        {
+          videoId: "cQ2a-PeeqKw",
+          text: "We entrust Abhishek with all our diverse video needs at Brrainothon. Whether it's editing or detailing long videos, creating engaging social media shorts, or polishing our crucial VSLs, his work is always top-notch. He delivers quickly and maintains extraordinarily high standard quality across all formats. Abhishek is the professional partner you need for video editing.",
+          author: "Brrainothon",
+          role: "Director"
+        }
+      ]
+    };
+
+    // Variables for mouse repulsion effect
+    let mouseX = 0;
+    let mouseY = 0;
+    let cameraElements = [];
+    const REPULSION_RADIUS = 150; // Distance at which icons start repelling
+    const REPULSION_FORCE = 30; // Strength of repulsion effect
+
+    // Testimonials variables
+    let currentTestimonial = 0;
+
+    // Initialize everything when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      initializeSocialLinks();
+      initializeShowreel();
+      initializeProjects();
+      initializeShorts();
+      initializeTestimonials();
+      initializeTypingEffect();
+      setupEventListeners();
+      createFloatingCameras(); // Initialize floating cameras
+      setupMouseTracking(); // Setup mouse tracking for repulsion effect
+      setupScrollIndicator(); // Setup scroll indicator
+    });
+
+    // Function to set up social media links
+    function initializeSocialLinks() {
+      // Contact section social links - ONLY LINKEDIN
+      document.getElementById('social-linkedin').href = socialLinks.linkedin;
+        document.getElementById('social-instagram').href = socialLinks.instagram;
+      
+      // Footer social links - ONLY LINKEDIN
+      document.getElementById('footer-linkedin').href = socialLinks.linkedin;
+      document.getElementById('footer-instagram').href = socialLinks.instagram;
+    }
+
+    function initializeShowreel() {
+      const thumbnail = document.getElementById('showreelThumbnail');
+      
+      // Set thumbnail background
+      thumbnail.style.backgroundImage = `url('https://img.youtube.com/vi/${videoConfig.showreel}/maxresdefault.jpg')`;
+      
+      // Set click event
+      thumbnail.onclick = () => playVideo('showreel', videoConfig.showreel);
+    }
+
+    function initializeProjects() {
+      const container = document.getElementById('projectsThumbnails');
+      const projectVideo = document.getElementById('projectVideo');
+      const projectTitle = document.getElementById('projectTitle');
+      const projectAchievements = document.getElementById('projectAchievements');
+      
+      // Clear containers
+      container.innerHTML = '';
+      projectAchievements.innerHTML = '';
+      
+      // Create thumbnails
+      videoConfig.projects.forEach((videoId, index) => {
+        const data = videoData.projects[index];
+        const thumbnail = document.createElement('div');
+        thumbnail.className = `thumbnail ${index === 0 ? 'active' : ''}`;
+        thumbnail.innerHTML = `
+          <div class="thumbnail-img" style="background-image: url('https://img.youtube.com/vi/${videoId}/maxresdefault.jpg')">
+            <div class="play-icon">
+              <i class="fas fa-play" style="color: white; font-size: 14px;"></i>
+            </div>
+          </div>
+          <div class="thumbnail-info">
+            <div class="thumbnail-title">${data.title}</div>
+          </div>
+        `;
+        
+        thumbnail.onclick = () => {
+          // Update active state
+          document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+          thumbnail.classList.add('active');
+          
+          // Update video and details
+          projectVideo.src = `https://www.youtube.com/embed/${videoId}`;
+          projectTitle.textContent = data.title;
+          
+          // Update achievements
+          projectAchievements.innerHTML = '';
+          data.achievements.forEach(achievement => {
+            const li = document.createElement('li');
+            li.textContent = achievement;
+            projectAchievements.appendChild(li);
+          });
+        };
+        
+        container.appendChild(thumbnail);
+      });
+      
+      // Set initial video (first project)
+      if (videoConfig.projects.length > 0) {
+        const firstProject = videoData.projects[0];
+        projectVideo.src = `https://www.youtube.com/embed/${videoConfig.projects[0]}`;
+        projectTitle.textContent = firstProject.title;
+        
+        // Set initial achievements
+        projectAchievements.innerHTML = '';
+        firstProject.achievements.forEach(achievement => {
+          const li = document.createElement('li');
+          li.textContent = achievement;
+          projectAchievements.appendChild(li);
+        });
+      }
+    }
+
+    function initializeShorts() {
+      const container = document.getElementById('shorts-carousel');
+      const dotsContainer = document.getElementById('shorts-dots');
+      
+      // Clear containers
+      container.innerHTML = '';
+      dotsContainer.innerHTML = '';
+      
+      // Create short cards
+      videoConfig.shorts.forEach((videoId, index) => {
+        const shortCard = document.createElement('div');
+        shortCard.className = 'short-card';
+        shortCard.innerHTML = `
+          <iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        `;
+        container.appendChild(shortCard);
+        
+        // Create dots for mobile
+        const dot = document.createElement('div');
+        dot.className = `carousel-dot ${index === 0 ? 'active' : ''}`;
+        dot.onclick = () => goToShort(index);
+        dotsContainer.appendChild(dot);
+      });
+      
+      // Add scroll event listener to update active dot
+      container.addEventListener('scroll', updateActiveDot);
+    }
+
+    // Function to update active dot based on scroll position
+    function updateActiveDot() {
+      const container = document.getElementById('shorts-carousel');
+      const dots = document.querySelectorAll('.carousel-dot');
+      const scrollLeft = container.scrollLeft;
+      const cardWidth = container.querySelector('.short-card').offsetWidth;
+      const gap = 20; // Gap between cards
+      
+      // Calculate current active index
+      const activeIndex = Math.round(scrollLeft / (cardWidth + gap));
+      
+      // Update dots
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === activeIndex);
+      });
+    }
+
+    // Function to scroll to a specific short
+    function goToShort(index) {
+      const container = document.getElementById('shorts-carousel');
+      const cardWidth = container.querySelector('.short-card').offsetWidth;
+      const gap = 20; // Gap between cards
+      
+      container.scrollTo({
+        left: index * (cardWidth + gap),
+        behavior: 'smooth'
+      });
+    }
+
+    function initializeTestimonials() {
+      const container = document.getElementById('testimonialsCarousel');
+      const navContainer = document.getElementById('testimonialNav');
+      
+      // Clear containers
+      container.innerHTML = '';
+      navContainer.innerHTML = '';
+      
+      // Create testimonial slides
+      videoData.testimonials.forEach((testimonial, index) => {
+        const slide = document.createElement('div');
+        slide.className = 'testimonial-slide';
+        slide.innerHTML = `
+          <div class="testimonial-video">
+            <iframe src="https://www.youtube.com/embed/${testimonial.videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="testimonial-content">
+            <p class="testimonial-text">${testimonial.text}</p>
+            <h4 class="testimonial-author">${testimonial.author}</h4>
+            <p class="testimonial-role">${testimonial.role}</p>
+          </div>
+        `;
+        container.appendChild(slide);
+        
+        // Create navigation dots
+        const dot = document.createElement('div');
+        dot.className = `testimonial-dot ${index === 0 ? 'active' : ''}`;
+        dot.onclick = () => goToTestimonial(index);
+        navContainer.appendChild(dot);
+      });
+    }
+
+    function playVideo(containerId, videoId) {
+      const container = document.querySelector(`#${containerId}Video`);
+      const thumbnail = document.querySelector(`#${containerId}Video`).previousElementSibling;
+      
+      container.src = `https://www.youtube.com/embed/${videoId}`;
+      container.classList.add('active');
+      thumbnail.classList.add('hidden');
+    }
+
+    function openInYouTube(videoId) {
+      window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
+    }
+
+    function initializeTypingEffect() {
+      const typingSpan = document.getElementById('typing');
+      if (typingSpan) {
+        const text = ["Video Editor", "Content Creator", "Post Production Expert"];
+        let index = 0, charIndex = 0, typingTimer, eraseTimer;
+
+        function type() {
+          if (charIndex < text[index].length) {
+            typingSpan.innerHTML += text[index].charAt(charIndex);
+            charIndex++;
+            typingTimer = setTimeout(type, 80);
+          } else {
+            eraseTimer = setTimeout(erase, 1000);
+          }
+        }
+
+        function erase() {
+          if (charIndex > 0) {
+            typingSpan.innerHTML = text[index].substring(0, charIndex - 1);
+            charIndex--;
+            setTimeout(erase, 50);
+          } else {
+            index = (index + 1) % text.length;
+            setTimeout(type, 200);
+          }
+        }
+
+        type();
+      }
+    }
+
+    // Testimonials navigation functions
+    function nextTestimonial() {
+      currentTestimonial = (currentTestimonial + 1) % videoData.testimonials.length;
+      updateTestimonial();
+    }
+
+    function prevTestimonial() {
+      currentTestimonial = (currentTestimonial - 1 + videoData.testimonials.length) % videoData.testimonials.length;
+      updateTestimonial();
+    }
+
+    function goToTestimonial(index) {
+      currentTestimonial = index;
+      updateTestimonial();
+    }
+
+    function updateTestimonial() {
+      const carousel = document.getElementById('testimonialsCarousel');
+      const dots = document.querySelectorAll('.testimonial-dot');
+      
+      // Update carousel position
+      carousel.style.transform = `translateX(-${currentTestimonial * 100}%)`;
+      
+      // Update active dot
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentTestimonial);
+      });
+    }
+
+    function setupEventListeners() {
+      // Shorts Carousel
+      const shortsCarousel = document.getElementById('shorts-carousel');
+      window.scrollShortsLeft = () => shortsCarousel.scrollBy({ left: -340, behavior: 'smooth' });
+      window.scrollShortsRight = () => shortsCarousel.scrollBy({ left: 340, behavior: 'smooth' });
+
+      // Page Navigation
+      const mainNavbar = document.getElementById('main-navbar');
+      const aboutNavbar = document.getElementById('about-navbar');
+      const mainContent = document.getElementById('main-content');
+      const aboutPage = document.getElementById('about-page');
+      const homeLink = document.getElementById('home-link');
+      const aboutLink = document.getElementById('about-link');
+      
+      aboutLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        mainNavbar.style.display = 'none';
+        aboutNavbar.style.display = 'flex';
+        mainContent.style.display = 'none';
+        aboutPage.style.display = 'block';
+        window.scrollTo(0, 0);
+      });
+      
+      homeLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        mainNavbar.style.display = 'flex';
+        aboutNavbar.style.display = 'none';
+        mainContent.style.display = 'block';
+        aboutPage.style.display = 'none';
+        window.scrollTo(0, 0);
+      });
+      
+      document.addEventListener('click', function(e) {
+        if (e.target.matches('[data-target]')) {
+          e.preventDefault();
+          const targetSection = e.target.getAttribute('data-target');
+          mainNavbar.style.display = 'flex';
+          aboutNavbar.style.display = 'none';
+          mainContent.style.display = 'block';
+          aboutPage.style.display = 'none';
+          setTimeout(() => {
+            document.getElementById(targetSection).scrollIntoView({ behavior: 'smooth' });
+          }, 100);
+        }
+      });
+
+      // Mobile Menu Functionality
+      const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+      const aboutMobileMenuToggle = document.getElementById('aboutMobileMenuToggle');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+      const mobileAboutLink = document.getElementById('mobile-about-link');
+      const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+      function toggleMobileMenu() {
+        mobileMenu.classList.toggle('active');
+        mobileMenuOverlay.classList.toggle('active');
+        document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+      }
+
+      function closeMobileMenu() {
+        mobileMenu.classList.remove('active');
+        mobileMenuOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      // Toggle mobile menu
+      if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+      }
+
+      if (aboutMobileMenuToggle) {
+        aboutMobileMenuToggle.addEventListener('click', toggleMobileMenu);
+      }
+
+      // Close menu when clicking overlay
+      if (mobileMenuOverlay) {
+        mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+      }
+
+      // Mobile about link
+      if (mobileAboutLink) {
+        mobileAboutLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          closeMobileMenu();
+          aboutLink.click();
+        });
+      }
+
+      // Mobile navigation links
+      mobileNavLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          closeMobileMenu();
+          const targetId = this.getAttribute('href').substring(1);
+          document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+
+      // Add touch swipe support for testimonials
+      const testimonialsCarousel = document.getElementById('testimonialsCarousel');
+      let startX = 0;
+      let endX = 0;
+
+      testimonialsCarousel.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+      });
+
+      testimonialsCarousel.addEventListener('touchend', (e) => {
+        endX = e.changedTouches[0].clientX;
+        handleSwipe();
+      });
+
+      function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = startX - endX;
+
+        if (Math.abs(diff) > swipeThreshold) {
+          if (diff > 0) {
+            // Swipe left - next testimonial
+            nextTestimonial();
+          } else {
+            // Swipe right - previous testimonial
+            prevTestimonial();
+          }
+        }
+      }
+    }
+
+    // Setup scroll indicator functionality
+    function setupScrollIndicator() {
+      const shortsCarousel = document.getElementById('shorts-carousel');
+      const scrollIndicator = document.querySelector('.scroll-indicator');
+      
+      if (!shortsCarousel || !scrollIndicator) return;
+      
+      // Hide indicator after user starts scrolling
+      let scrollTimeout;
+      shortsCarousel.addEventListener('scroll', function() {
+        scrollIndicator.style.opacity = '0';
+        
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+          scrollIndicator.style.opacity = '1';
+        }, 3000); // Show again after 3 seconds of inactivity
+      });
+      
+      // Hide indicator after 5 seconds initially
+      setTimeout(() => {
+        scrollIndicator.style.opacity = '0';
+      }, 5000);
+    }
+
+    // Setup mouse tracking for repulsion effect
+    function setupMouseTracking() {
+      // Track mouse position
+      document.addEventListener('mousemove', function(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        
+        // Apply repulsion effect to all camera icons
+        applyRepulsionEffect();
+      });
+    }
+
+    // Apply repulsion effect to camera icons
+    function applyRepulsionEffect() {
+      cameraElements.forEach(camera => {
+        const rect = camera.getBoundingClientRect();
+        const cameraX = rect.left + rect.width / 2;
+        const cameraY = rect.top + rect.height / 2;
+        
+        // Calculate distance between mouse and camera icon
+        const dx = mouseX - cameraX;
+        const dy = mouseY - cameraY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        // If mouse is within repulsion radius, move the icon away
+        if (distance < REPULSION_RADIUS) {
+          // Calculate repulsion force (stronger when closer)
+          const force = (1 - distance / REPULSION_RADIUS) * REPULSION_FORCE;
+          
+          // Calculate direction (away from mouse)
+          const angle = Math.atan2(dy, dx);
+          const moveX = -Math.cos(angle) * force;
+          const moveY = -Math.sin(angle) * force;
+          
+          // Get current position
+          const currentLeft = parseFloat(camera.style.left || '0');
+          const currentTop = parseFloat(camera.style.top || '0');
+          
+          // Calculate new position
+          let newLeft = currentLeft + moveX;
+          let newTop = currentTop + moveY;
+          
+          // Keep icons within screen bounds
+          newLeft = Math.max(0, Math.min(newLeft, 100));
+          newTop = Math.max(0, Math.min(newTop, 100));
+          
+          // Apply the transformation - keep the new position
+          camera.style.left = newLeft + 'vw';
+          camera.style.top = newTop + 'vh';
+        }
+      });
+    }
+
+    // create 30 floating camera icons
+    function createFloatingCameras() {
+      const count = 30;
+      const container = document.getElementById('floating-cameras');
+      if (!container) return;
+
+      // Clear any existing icons
+      container.innerHTML = '';
+      cameraElements = [];
+
+      for (let i = 0; i < count; i++) {
+        const el = document.createElement('div');
+        el.className = 'fcam';
+        // random size between 18 and 56px
+        const size = Math.round(18 + Math.random() * 38);
+        el.style.fontSize = size + 'px';
+
+        // random initial position - use viewport units for mobile compatibility
+        const left = Math.random() * 80 + 10;  // Keep within 10-90% to avoid edges
+        const top  = Math.random() * 80 + 10;  // Keep within 10-90% to avoid edges
+        el.style.left = left + 'vw';
+        el.style.top  = top + 'vh';
+
+        // random opacity & slight scale
+        el.style.opacity = (0.25 + Math.random() * 0.9).toFixed(2);
+        const scale = (0.9 + Math.random() * 0.6).toFixed(2);
+        el.style.transform = `scale(${scale})`;
+
+        // random animation durations & delays
+        const floatDur = 8 + Math.random() * 14; // seconds 8 - 22
+        const swayDur  = 4 + Math.random() * 8;  // seconds 4 - 12
+        const delay    = (Math.random() * 6).toFixed(2); // 0 - 6s
+
+        // apply combined animations using CSS animation shorthand.
+        el.style.animation = `floatY ${floatDur}s ease-in-out ${delay}s infinite, swayX ${swayDur}s ease-in-out ${delay}s infinite`;
+
+        // set a small random rotation to vary icons
+        const rot = (Math.random() * 40 - 20).toFixed(2);
+        el.style.transform = `scale(${scale}) rotate(${rot}deg)`;
+
+        // insert Font Awesome camera icon (already included on your page)
+        el.innerHTML = `<i class="fas fa-camera" aria-hidden="true"></i>`;
+
+        container.appendChild(el);
+        cameraElements.push(el);
+      }
+
+      // Optional: gently fade the whole container in for nicer entrance
+      container.style.opacity = '0';
+      container.style.transition = 'opacity 800ms ease';
+      requestAnimationFrame(() => { container.style.opacity = '1'; });
+    }
+
+    // Recreate floating cameras on window resize to ensure proper positioning
+    window.addEventListener('resize', function() {
+      createFloatingCameras();
+    });
+  </script>
+</body>
+</html>
