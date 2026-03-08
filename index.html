@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -460,14 +461,15 @@
     }
     
     .video-thumbnails {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      max-height: 650px;
-      overflow-y: auto;
-      padding-right: 15px;
-    }
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-height: 650px;
+  overflow-y: auto;
+  padding-right: 15px;
+  flex-shrink: 0;
+}
     
     .video-thumbnails::-webkit-scrollbar {
       width: 8px;
@@ -494,6 +496,7 @@
       border: 1px solid rgba(255,255,255,0.08);
       position: relative;
       overflow: hidden;
+      flex-shrink: 0;
     }
     
     .thumbnail::before {
@@ -2056,6 +2059,14 @@
       </div>
       <h4 class="client-name">Learn Capsule</h4>
     </div>
+
+    <div class="client">
+      <div class="client-logo">
+        <!-- Replace the div with an img tag -->
+        <img src="logo4.png" alt="Lean Capsule Logo">
+      </div>
+      <h4 class="client-name">Over and out</h4>
+    </div>
   </div>
 </section>
 
@@ -2195,7 +2206,7 @@
     // =============================================
     const videoConfig = {
       // Showreel Video (Main showcase video)
-      showreel: "3sZnaoAF0Bw",
+      showreel: "jtIM7cDWGXc",
       
       // YouTube Projects (5 videos for the projects section)
       projects: [
@@ -2203,7 +2214,11 @@
         "kbBigpViPXM", 
         "IiE61fCp3T0",
         "VIsqv8O-7Do",
-        "GaXz-4iIgyA"
+        "GaXz-4iIgyA",
+        "edJRbEeruHo",
+        "uKDMfK4Yvac",
+        "GaiigaUYBCM",
+        "8z6uS0LCJL0"
       ],
       
       // Shorts Videos (5 YouTube Shorts)
@@ -2211,7 +2226,13 @@
         "oFFE3bHQPPI",
         "N-ZjBalJJ8E",
         "2zuxXRfT0Js",
-        "8zguXAYPFHs"
+        "8zguXAYPFHs",
+        "woIEK5PWJuc",
+        "yWzsI-lHuew",
+        "bqBAnGhjXGM",
+        "2hOGn-Z9dGg",
+        "jiw-qk5jlQs",
+        "fld4Qnt28Zw"
       ]
     };
 
@@ -2268,7 +2289,43 @@
             "Gained over 2.3K+ highly targeted views from GPSC aspirants, effectively driving organic engagement within the competitive education niche.",
             "Strengthened the 'Sankalp Education' brand authority by professionally showcasing successful officer journeys to build trust and inspire future students."
           ]
-        }
+        },
+        { 
+          title: "Interview with Founder of Meena Bagh Homes", 
+          channel: "Creative Studio", 
+          achievements: [
+            "Crafted a high-quality conversational edit, refining pacing and narrative flow to highlight the founder’s story from DAY 1.",
+            "Designed clean typography, transitions & audio balancing, enhancing brand perception and overall viewer engagement.",
+            "Delivered a polished, documentary-style interview optimized for long-form retention and premium hospitality branding."
+          ]
+        },
+        { 
+          title: "Turning Real Stories Into Cinema – Documentary Edit", 
+          channel: "Creative Studio", 
+          achievements: [
+            "Transformed real-life moments into a cinematic narrative, blending visuals and emotions for deeper audience connection.",
+            "Enhanced storytelling with precise pacing, expressive transitions, and atmospheric sound design, boosting viewer immersion.",
+            "Delivered a polished documentary edit built to elevate brand identity, increase retention, and strengthen storytelling impact."
+          ]
+        },
+        { 
+          title: "Which Stream After 10th? The Truth No One Tells!", 
+          channel: "Creative Studio", 
+          achievements: [
+            "Shaped a compelling long-form narrative that guides students through real career choices with clarity and confidence.",
+            "Integrated clear visual cues, animated text, and structured pacing to keep complex information engaging and easy to follow.",
+            "Delivered a high-quality educational edit focused on audience trust, longer watch-time, and strong brand credibility."
+          ]
+        },
+        { 
+          title: "My Journey to Spiti Valley Uncovered the Secrets of its Frozen Wilderness", 
+          channel: "Creative Studio", 
+          achievements: [
+            "Turned raw travel footage into a cinematic winter documentary, capturing the scale and serenity of Spiti Valley’s frozen landscapes.",
+            "Enhanced the visual journey with carefully paced cuts, cinematic color grading, and music-driven storytelling.",
+            "Shaped an immersive travel narrative focused on visual atmosphere, natural beauty, and authentic exploration."
+          ]
+        },
       ],
       testimonials: [
         {
